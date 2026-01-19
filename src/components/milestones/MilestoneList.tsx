@@ -6,7 +6,7 @@ import { SearchInput, Select, Toggle, Badge } from '@/components/ui';
 import { allMilestones } from '@/data/milestones';
 import { useProgressStore } from '@/store/progress-store';
 import { CATEGORY_INFO, PHASE_INFO, type MilestoneCategory, type Phase } from '@/types/milestone';
-import { Filter, SlidersHorizontal } from 'lucide-react';
+import { Filter, SlidersHorizontal, Palmtree, Minus, Plus } from 'lucide-react';
 
 const categoryOptions = [
   { value: '', label: 'All Categories' },
@@ -25,12 +25,15 @@ const phaseOptions = [
 ];
 
 export function MilestoneList() {
-  const { completedMilestones } = useProgressStore();
+  const { completedMilestones, vacationHomesDesigned, setVacationHomesCount } = useProgressStore();
   const [search, setSearch] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('');
   const [phaseFilter, setPhaseFilter] = useState('');
   const [hideCompleted, setHideCompleted] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
+
+  // Check if DLC/Phase 7 content is being viewed
+  const showVacationHomesCounter = categoryFilter === 'dlc' || phaseFilter === '7';
 
   const filteredMilestones = useMemo(() => {
     return allMilestones.filter((milestone) => {
@@ -64,6 +67,8 @@ export function MilestoneList() {
       4: [],
       5: [],
       6: [],
+      7: [],
+      8: [],
     };
 
     filteredMilestones.forEach((milestone) => {
@@ -125,6 +130,52 @@ export function MilestoneList() {
                 onChange={setHideCompleted}
                 label="Hide completed"
               />
+            </div>
+          </div>
+        )}
+
+        {/* Vacation Homes Counter - shown when viewing DLC content */}
+        {showVacationHomesCounter && (
+          <div className="p-4 rounded-xl bg-gradient-to-r from-cyan-50 to-blue-50 border-2 border-cyan-200 animate-fade-in-up">
+            <div className="flex items-center justify-between flex-wrap gap-4">
+              <div className="flex items-center gap-3">
+                <div className="p-2 rounded-lg bg-cyan-100">
+                  <Palmtree className="w-5 h-5 text-cyan-600" />
+                </div>
+                <div>
+                  <h4 className="font-semibold text-gray-900">Happy Home Paradise Progress</h4>
+                  <p className="text-sm text-gray-600">
+                    Track your vacation homes to unlock HHP milestones
+                  </p>
+                </div>
+              </div>
+              <div className="flex items-center gap-3">
+                <span className="text-sm text-gray-600">Homes designed:</span>
+                <div className="flex items-center gap-2 bg-white rounded-lg border border-cyan-200 p-1">
+                  <button
+                    onClick={() => setVacationHomesCount(Math.max(0, vacationHomesDesigned - 1))}
+                    className="p-2 rounded-md hover:bg-cyan-50 text-cyan-600 transition-colors"
+                    aria-label="Decrease vacation homes"
+                  >
+                    <Minus size={16} />
+                  </button>
+                  <input
+                    type="number"
+                    value={vacationHomesDesigned}
+                    onChange={(e) => setVacationHomesCount(parseInt(e.target.value) || 0)}
+                    min={0}
+                    max={999}
+                    className="w-16 text-center font-bold text-lg text-cyan-700 bg-transparent border-none focus:outline-none focus:ring-0"
+                  />
+                  <button
+                    onClick={() => setVacationHomesCount(vacationHomesDesigned + 1)}
+                    className="p-2 rounded-md hover:bg-cyan-50 text-cyan-600 transition-colors"
+                    aria-label="Increase vacation homes"
+                  >
+                    <Plus size={16} />
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         )}

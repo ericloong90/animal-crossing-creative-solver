@@ -6,6 +6,7 @@ import { persist, createJSONStorage, type StateStorage } from 'zustand/middlewar
 interface ProgressState {
   completedMilestones: string[];
   lastUpdated: string;
+  vacationHomesDesigned: number;
 }
 
 interface ProgressActions {
@@ -16,6 +17,7 @@ interface ProgressActions {
   resetProgress: () => void;
   getCompletedCount: () => number;
   getCompletedSet: () => Set<string>;
+  setVacationHomesCount: (count: number) => void;
 }
 
 type ProgressStore = ProgressState & ProgressActions;
@@ -41,6 +43,7 @@ export const useProgressStore = create<ProgressStore>()(
     (set, get) => ({
       completedMilestones: [],
       lastUpdated: new Date().toISOString(),
+      vacationHomesDesigned: 0,
 
       toggleMilestone: (id: string) => {
         const { completedMilestones } = get();
@@ -81,6 +84,7 @@ export const useProgressStore = create<ProgressStore>()(
       resetProgress: () => {
         set({
           completedMilestones: [],
+          vacationHomesDesigned: 0,
           lastUpdated: new Date().toISOString(),
         });
       },
@@ -91,6 +95,13 @@ export const useProgressStore = create<ProgressStore>()(
 
       getCompletedSet: () => {
         return new Set(get().completedMilestones);
+      },
+
+      setVacationHomesCount: (count: number) => {
+        set({
+          vacationHomesDesigned: Math.max(0, count),
+          lastUpdated: new Date().toISOString(),
+        });
       },
     }),
     {

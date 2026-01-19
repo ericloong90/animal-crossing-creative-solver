@@ -4,12 +4,15 @@ export type MilestoneCategory =
   | 'house'
   | 'tools'
   | 'villagers'
-  | 'island-rating';
+  | 'island-rating'
+  | 'dlc'
+  | 'cooking'
+  | 'npcs';
 
-export type Phase = 1 | 2 | 3 | 4 | 5 | 6;
+export type Phase = 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8;
 
 export interface Requirement {
-  type: 'item' | 'currency' | 'action' | 'creature' | 'time';
+  type: 'item' | 'currency' | 'action' | 'creature' | 'time' | 'vacation-homes';
   name: string;
   quantity?: number;
   description?: string;
@@ -53,6 +56,8 @@ export const PHASE_INFO: Record<Phase, { name: string; days: string; description
   4: { name: 'Town Hall', days: '8-12', description: 'Upgrade Resident Services and meet Isabelle' },
   5: { name: 'Island Designer', days: '12-30+', description: 'Reach 3 stars and unlock terraforming' },
   6: { name: 'Late Game', days: 'Ongoing', description: 'Unlock all shops and complete your island' },
+  7: { name: '2.0 Update & DLC', days: 'Post-Game', description: 'Brewster, cooking, Kapp\'n, and Happy Home Paradise' },
+  8: { name: '3.0 Update', days: 'Post-Game', description: 'Kapp\'n\'s Resort Hotel, Resetti, Slumber Islands, and Switch 2 enhancements' },
 };
 
 export const CATEGORY_INFO: Record<MilestoneCategory, { name: string; icon: string; color: string }> = {
@@ -62,4 +67,7 @@ export const CATEGORY_INFO: Record<MilestoneCategory, { name: string; icon: stri
   'tools': { name: 'Tools & DIY', icon: 'Hammer', color: 'gray' },
   'villagers': { name: 'Villagers', icon: 'Users', color: 'pink' },
   'island-rating': { name: 'Island Rating', icon: 'Star', color: 'yellow' },
+  'dlc': { name: 'Happy Home Paradise', icon: 'Palmtree', color: 'cyan' },
+  'cooking': { name: 'Cooking & Farming', icon: 'ChefHat', color: 'green' },
+  'npcs': { name: 'NPCs & Shops', icon: 'Store', color: 'purple' },
 };

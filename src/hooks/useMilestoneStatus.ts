@@ -6,7 +6,7 @@ import { getMilestoneStatus, getMilestonesBlockedBy, getAllPrerequisites } from 
 import type { Milestone } from '@/types/milestone';
 
 export function useMilestoneStatus(milestone: Milestone) {
-  const { completedMilestones, toggleMilestone } = useProgressStore();
+  const { completedMilestones, toggleMilestone, vacationHomesDesigned } = useProgressStore();
 
   // Convert array to Set for compatibility
   const completedSet = useMemo(
@@ -15,8 +15,8 @@ export function useMilestoneStatus(milestone: Milestone) {
   );
 
   const status = useMemo(
-    () => getMilestoneStatus(milestone, completedSet),
-    [milestone, completedSet]
+    () => getMilestoneStatus(milestone, completedSet, vacationHomesDesigned),
+    [milestone, completedSet, vacationHomesDesigned]
   );
 
   const blockedMilestones = useMemo(

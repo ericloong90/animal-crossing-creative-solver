@@ -4,6 +4,8 @@ import { phase3Milestones } from './phase3-expansion';
 import { phase4Milestones } from './phase4-townhall';
 import { phase5Milestones } from './phase5-designer';
 import { phase6Milestones } from './phase6-late-game';
+import { phase7Milestones } from './phase7-post-kk';
+import { phase8Milestones } from './phase8-update-3';
 import type { Milestone, Phase } from '@/types/milestone';
 
 export const allMilestones: Milestone[] = [
@@ -13,6 +15,8 @@ export const allMilestones: Milestone[] = [
   ...phase4Milestones,
   ...phase5Milestones,
   ...phase6Milestones,
+  ...phase7Milestones,
+  ...phase8Milestones,
 ];
 
 export const milestonesByPhase: Record<Phase, Milestone[]> = {
@@ -22,6 +26,8 @@ export const milestonesByPhase: Record<Phase, Milestone[]> = {
   4: phase4Milestones,
   5: phase5Milestones,
   6: phase6Milestones,
+  7: phase7Milestones,
+  8: phase8Milestones,
 };
 
 export const milestoneById = new Map<string, Milestone>(
@@ -47,4 +53,6 @@ export {
   phase4Milestones,
   phase5Milestones,
   phase6Milestones,
+  phase7Milestones,
+  phase8Milestones,
 };

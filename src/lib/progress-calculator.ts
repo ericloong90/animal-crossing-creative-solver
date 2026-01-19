@@ -2,11 +2,28 @@ import { allMilestones, getMilestone } from '@/data/milestones';
 import type { Milestone, MilestoneStatus, Phase } from '@/types/milestone';
 
 /**
+ * Check if vacation-homes requirements are met for a milestone
+ */
+export function checkVacationHomesRequirements(
+  milestone: Milestone,
+  vacationHomesDesigned: number
+): boolean {
+  const vacationHomesReq = milestone.requirements.find(
+    (req) => req.type === 'vacation-homes'
+  );
+
+  if (!vacationHomesReq) return true; // No vacation-homes requirement
+
+  return vacationHomesDesigned >= (vacationHomesReq.quantity ?? 0);
+}
+
+/**
  * Calculate the status of a milestone based on completion state
  */
 export function getMilestoneStatus(
   milestone: Milestone,
-  completedMilestones: Set<string>
+  completedMilestones: Set<string>,
+  vacationHomesDesigned: number = 0
 ): MilestoneStatus {
   const isCompleted = completedMilestones.has(milestone.id);
 
@@ -15,7 +32,13 @@ export function getMilestoneStatus(
     (prereqId) => !completedMilestones.has(prereqId)
   );
 
-  const isAvailable = missingPrerequisites.length === 0;
+  // Check vacation-homes requirements
+  const meetsVacationHomesReq = checkVacationHomesRequirements(
+    milestone,
+    vacationHomesDesigned
+  );
+
+  const isAvailable = missingPrerequisites.length === 0 && meetsVacationHomesReq;
 
   return {
     milestone,
@@ -29,10 +52,11 @@ export function getMilestoneStatus(
  * Get all available (unlocked but not completed) milestones
  */
 export function getAvailableMilestones(
-  completedMilestones: Set<string>
+  completedMilestones: Set<string>,
+  vacationHomesDesigned: number = 0
 ): MilestoneStatus[] {
   return allMilestones
-    .map((m) => getMilestoneStatus(m, completedMilestones))
+    .map((m) => getMilestoneStatus(m, completedMilestones, vacationHomesDesigned))
     .filter((status) => status.isAvailable && !status.isCompleted);
 }
 
@@ -46,9 +70,10 @@ export function getAvailableMilestones(
  */
 export function getWhatsNext(
   completedMilestones: Set<string>,
-  limit: number = 5
+  limit: number = 5,
+  vacationHomesDesigned: number = 0
 ): MilestoneStatus[] {
-  const available = getAvailableMilestones(completedMilestones);
+  const available = getAvailableMilestones(completedMilestones, vacationHomesDesigned);
 
   // Sort by priority
   const sorted = available.sort((a, b) => {
@@ -80,6 +105,8 @@ export function getWhatsNext(
 export function getCurrentPhase(completedMilestones: Set<string>): Phase {
   // Check phase milestones in reverse order
   const phaseMarkers: { phase: Phase; milestoneId: string }[] = [
+    { phase: 8, milestoneId: 'hotel-opens' }, // Phase 8 starts when the hotel opens (3.0 content)
+    { phase: 7, milestoneId: 'meet-kappn' }, // Phase 7 starts when you meet Kapp'n (2.0 content)
     { phase: 6, milestoneId: 'unlock-island-designer' },
     { phase: 5, milestoneId: 'kk-concert' },
     { phase: 4, milestoneId: 'meet-isabelle' },
@@ -91,8 +118,8 @@ export function getCurrentPhase(completedMilestones: Set<string>): Phase {
   for (const marker of phaseMarkers) {
     if (completedMilestones.has(marker.milestoneId)) {
       // Return the next phase if possible
-      const nextPhase = Math.min(marker.phase + 1, 6) as Phase;
-      return marker.phase === 6 ? 6 : nextPhase;
+      const nextPhase = Math.min(marker.phase + 1, 8) as Phase;
+      return marker.phase === 8 ? 8 : nextPhase;
     }
   }
 
@@ -127,6 +154,8 @@ export function getProgressStats(completedMilestones: Set<string>) {
     4: { completed: 0, total: 0 },
     5: { completed: 0, total: 0 },
     6: { completed: 0, total: 0 },
+    7: { completed: 0, total: 0 },
+    8: { completed: 0, total: 0 },
   };
 
   for (const milestone of allMilestones) {

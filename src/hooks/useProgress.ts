@@ -13,6 +13,8 @@ export function useProgress() {
     isCompleted,
     resetProgress,
     getCompletedCount,
+    vacationHomesDesigned,
+    setVacationHomesCount,
   } = useProgressStore();
 
   // Convert array to Set for compatibility with progress calculator
@@ -41,5 +43,7 @@ export function useProgress() {
     getCompletedCount,
     stats,
     currentPhase,
+    vacationHomesDesigned,
+    setVacationHomesCount,
   };
 }

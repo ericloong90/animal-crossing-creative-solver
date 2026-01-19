@@ -25,6 +25,9 @@ import {
   Clock,
   Package,
   Zap,
+  Palmtree,
+  ChefHat,
+  Store,
 } from 'lucide-react';
 
 const categoryIcons = {
@@ -34,6 +37,9 @@ const categoryIcons = {
   'tools': Hammer,
   'villagers': Users,
   'island-rating': Star,
+  'dlc': Palmtree,
+  'cooking': ChefHat,
+  'npcs': Store,
 };
 
 const requirementIcons = {
@@ -42,6 +48,7 @@ const requirementIcons = {
   action: Zap,
   creature: Bug,
   time: Clock,
+  'vacation-homes': Palmtree,
 };
 
 interface MilestoneDetailProps {
@@ -59,7 +66,7 @@ export function MilestoneDetail({ milestone }: MilestoneDetailProps) {
   } = useMilestoneStatus(milestone);
 
   const categoryInfo = CATEGORY_INFO[milestone.category];
-  const CategoryIcon = categoryIcons[milestone.category];
+  const CategoryIcon = categoryIcons[milestone.category as keyof typeof categoryIcons];
   const phaseInfo = PHASE_INFO[milestone.phase];
 
   return (
@@ -191,7 +198,7 @@ export function MilestoneDetail({ milestone }: MilestoneDetailProps) {
 
             <div className="space-y-3">
               {milestone.requirements.map((req, index) => {
-                const ReqIcon = requirementIcons[req.type];
+                const ReqIcon = requirementIcons[req.type as keyof typeof requirementIcons];
                 return (
                   <div
                     key={index}

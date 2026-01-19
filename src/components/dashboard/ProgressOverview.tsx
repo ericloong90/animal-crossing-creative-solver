@@ -11,6 +11,9 @@ import {
   Users,
   Star,
   Leaf,
+  Palmtree,
+  ChefHat,
+  Store,
 } from 'lucide-react';
 
 const categoryIcons = {
@@ -20,6 +23,9 @@ const categoryIcons = {
   'tools': Hammer,
   'villagers': Users,
   'island-rating': Star,
+  'dlc': Palmtree,
+  'cooking': ChefHat,
+  'npcs': Store,
 };
 
 export function ProgressOverview() {

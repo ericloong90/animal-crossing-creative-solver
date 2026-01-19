@@ -14,6 +14,9 @@ import {
   Hammer,
   Users,
   Star,
+  Palmtree,
+  ChefHat,
+  Store,
 } from 'lucide-react';
 
 const categoryIcons = {
@@ -23,6 +26,9 @@ const categoryIcons = {
   'tools': Hammer,
   'villagers': Users,
   'island-rating': Star,
+  'dlc': Palmtree,
+  'cooking': ChefHat,
+  'npcs': Store,
 };
 
 interface MilestoneCardProps {
@@ -39,7 +45,7 @@ export function MilestoneCard({ milestone, showDetails = true }: MilestoneCardPr
   } = useMilestoneStatus(milestone);
 
   const categoryInfo = CATEGORY_INFO[milestone.category];
-  const Icon = categoryIcons[milestone.category];
+  const Icon = categoryIcons[milestone.category as keyof typeof categoryIcons];
   const phaseInfo = PHASE_INFO[milestone.phase];
 
   return (
