@@ -1,0 +1,58 @@
+{
+  "name": "ACNH Progress Tracker",
+  "short_name": "ACNH Tracker",
+  "description": "Track your Animal Crossing: New Horizons progress, see what to do next, and never get stuck again!",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FDF8E8",
+  "theme_color": "#5D9C59",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["games", "utilities"],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Checklist",
+      "short_name": "Checklist",
+      "description": "View your progress checklist",
+      "url": "/checklist",
+      "icons": [
+        {
+          "src": "/icons/icon-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "What's Next",
+      "short_name": "Next",
+      "description": "See what to do next",
+      "url": "/stuck",
+      "icons": [
+        {
+          "src": "/icons/icon-192x192.png",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}

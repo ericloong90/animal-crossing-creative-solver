@@ -1,0 +1,217 @@
+import type { Milestone } from '@/types/milestone';
+
+export const phase3Milestones: Milestone[] = [
+  {
+    id: 'bridge-kit-received',
+    title: 'Receive Bridge Construction Kit',
+    description: 'Tom Nook gives you materials to build your first bridge.',
+    category: 'buildings',
+    phase: 3,
+    prerequisites: ['first-bridge-unlock'],
+    requirements: [
+      { type: 'action', name: 'Talk to Tom Nook about development' },
+    ],
+    tips: [
+      'The first bridge is free - no bells required!',
+      'Future bridges will cost bells to build.',
+    ],
+    isOptional: false,
+  },
+  {
+    id: 'place-first-bridge',
+    title: 'Place Your First Bridge',
+    description: 'Choose a river location for your first bridge.',
+    category: 'buildings',
+    phase: 3,
+    prerequisites: ['bridge-kit-received'],
+    requirements: [
+      { type: 'action', name: 'Find a suitable river crossing' },
+      { type: 'action', name: 'Place the bridge kit' },
+    ],
+    tips: [
+      'Bridges must be placed over water with land on both sides.',
+      'Consider which areas of your island need easier access.',
+      'The bridge will be built the next day.',
+    ],
+    isOptional: false,
+  },
+  {
+    id: 'housing-kits-received',
+    title: 'Receive 3 Housing Plot Kits',
+    description: 'Tom Nook provides kits to attract new villagers.',
+    category: 'villagers',
+    phase: 3,
+    prerequisites: ['place-first-bridge'],
+    requirements: [
+      { type: 'action', name: 'Return to Tom Nook after placing bridge' },
+    ],
+    tips: [
+      'You\'ll need to furnish each plot with specific items.',
+      'This includes both indoor and outdoor furniture.',
+    ],
+    isOptional: false,
+  },
+  {
+    id: 'ladder-recipe',
+    title: 'Learn Ladder Recipe',
+    description: 'Tom Nook sends you the ladder DIY recipe.',
+    category: 'tools',
+    phase: 3,
+    prerequisites: ['housing-kits-received'],
+    requirements: [
+      { type: 'item', name: 'Wood', quantity: 4 },
+      { type: 'item', name: 'Hardwood', quantity: 4 },
+      { type: 'item', name: 'Softwood', quantity: 4 },
+    ],
+    tips: [
+      'The ladder lets you climb cliffs!',
+      'Now you can access the upper levels of your island.',
+      'Check for fossils and resources up on the cliffs.',
+    ],
+    isOptional: false,
+  },
+  {
+    id: 'place-plot-1',
+    title: 'Set Up Housing Plot 1',
+    description: 'Place the first housing plot and craft the required furniture.',
+    category: 'villagers',
+    phase: 3,
+    prerequisites: ['housing-kits-received'],
+    requirements: [
+      { type: 'action', name: 'Place housing plot' },
+      { type: 'action', name: 'Craft required indoor items' },
+      { type: 'action', name: 'Craft required outdoor items' },
+    ],
+    tips: [
+      'Check the box at the plot to see required items.',
+      'Some recipes you need might come from villagers or bottles on the beach.',
+      'You can buy some items from Nook\'s Cranny.',
+    ],
+    commonIssues: [
+      {
+        symptom: 'Don\'t have the DIY recipe for required item',
+        cause: 'Some recipes are obtained randomly',
+        solution: 'Check beach bottles daily, talk to crafting villagers, and use Nook Miles to buy recipe packs.',
+      },
+    ],
+    isOptional: false,
+  },
+  {
+    id: 'place-plot-2',
+    title: 'Set Up Housing Plot 2',
+    description: 'Place the second housing plot and craft the required furniture.',
+    category: 'villagers',
+    phase: 3,
+    prerequisites: ['housing-kits-received'],
+    requirements: [
+      { type: 'action', name: 'Place housing plot' },
+      { type: 'action', name: 'Craft required indoor items' },
+      { type: 'action', name: 'Craft required outdoor items' },
+    ],
+    tips: [
+      'Each plot has different furniture requirements.',
+      'Spread the plots around for a natural village feel.',
+    ],
+    isOptional: false,
+  },
+  {
+    id: 'place-plot-3',
+    title: 'Set Up Housing Plot 3',
+    description: 'Place the third housing plot and craft the required furniture.',
+    category: 'villagers',
+    phase: 3,
+    prerequisites: ['housing-kits-received'],
+    requirements: [
+      { type: 'action', name: 'Place housing plot' },
+      { type: 'action', name: 'Craft required indoor items' },
+      { type: 'action', name: 'Craft required outdoor items' },
+    ],
+    tips: [
+      'Complete all three plots to trigger villager move-ins.',
+      'You can invite villagers from mystery islands before plots are ready.',
+    ],
+    isOptional: false,
+  },
+  {
+    id: 'villager-3-moves-in',
+    title: 'Villager #3 Moves In',
+    description: 'Your third villager arrives after completing a housing plot.',
+    category: 'villagers',
+    phase: 3,
+    prerequisites: ['place-plot-1'],
+    requirements: [
+      { type: 'time', name: 'Wait for move-in day' },
+    ],
+    tips: [
+      'If you invited someone from a mystery island, they\'ll move in.',
+      'Otherwise, a random villager will be assigned.',
+      'Talk to them to build friendship!',
+    ],
+    isOptional: false,
+  },
+  {
+    id: 'villager-4-moves-in',
+    title: 'Villager #4 Moves In',
+    description: 'Your fourth villager arrives.',
+    category: 'villagers',
+    phase: 3,
+    prerequisites: ['place-plot-2', 'villager-3-moves-in'],
+    requirements: [
+      { type: 'time', name: 'Wait for move-in day' },
+    ],
+    tips: [
+      'Villagers move in one per day.',
+      'Gift them items they like to increase friendship.',
+    ],
+    isOptional: false,
+  },
+  {
+    id: 'villager-5-moves-in',
+    title: 'Villager #5 Moves In',
+    description: 'Your fifth villager arrives, completing the initial group.',
+    category: 'villagers',
+    phase: 3,
+    prerequisites: ['place-plot-3', 'villager-4-moves-in'],
+    requirements: [
+      { type: 'time', name: 'Wait for move-in day' },
+    ],
+    tips: [
+      'With 5 villagers, your island is growing!',
+      'Tom Nook will have new development options soon.',
+    ],
+    isOptional: false,
+  },
+  {
+    id: 'report-to-nook-plots-done',
+    title: 'Report Completed Plots to Tom Nook',
+    description: 'Let Tom Nook know all housing plots are ready.',
+    category: 'main-story',
+    phase: 3,
+    prerequisites: ['place-plot-1', 'place-plot-2', 'place-plot-3'],
+    requirements: [
+      { type: 'action', name: 'Talk to Tom Nook' },
+    ],
+    tips: [
+      'This triggers the next phase of development.',
+      'Tom Nook will tell you about Resident Services upgrades.',
+    ],
+    isOptional: false,
+  },
+  {
+    id: 'first-house-expansion',
+    title: 'First House Expansion',
+    description: 'Expand your house to add a back room.',
+    category: 'house',
+    phase: 3,
+    prerequisites: ['upgrade-to-house'],
+    requirements: [
+      { type: 'currency', name: 'Bells', quantity: 198000 },
+    ],
+    tips: [
+      'Each expansion adds more room and storage space.',
+      'Your storage increases with each upgrade.',
+      'Talk to Tom Nook at Resident Services to start.',
+    ],
+    isOptional: true,
+  },
+];

@@ -1,26 +1,200 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* ACNH Color Palette */
+  --cream: #FDF8E8;
+  --cream-dark: #F5EDD8;
+  --nook-green: #5D9C59;
+  --nook-green-light: #7FBF7B;
+  --nook-green-dark: #4A7A47;
+  --wood-brown: #8B7355;
+  --wood-brown-light: #A89070;
+  --wood-brown-dark: #6B5842;
+  --bell-yellow: #FFD93D;
+  --bell-yellow-light: #FFE566;
+  --sky-blue: #87CEEB;
+  --sky-blue-light: #B0E0F0;
+  --ocean-blue: #4A90A4;
+  --sand: #F4E4BC;
+  --coral-pink: #FFB4A2;
+  --leaf-shadow: rgba(93, 156, 89, 0.15);
+
+  /* Semantic Colors */
+  --background: var(--cream);
+  --background-alt: var(--cream-dark);
+  --foreground: #3D3D3D;
+  --foreground-muted: #6B6B6B;
+  --primary: var(--nook-green);
+  --primary-light: var(--nook-green-light);
+  --primary-dark: var(--nook-green-dark);
+  --accent: var(--bell-yellow);
+  --accent-light: var(--bell-yellow-light);
+  --border: var(--wood-brown-light);
+  --border-light: #D4C4A8;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 4px rgba(107, 88, 66, 0.1);
+  --shadow-md: 0 4px 12px rgba(107, 88, 66, 0.15);
+  --shadow-lg: 0 8px 24px rgba(107, 88, 66, 0.2);
+
+  /* Fonts */
+  --font-display: 'Quicksand', sans-serif;
+  --font-body: 'Nunito', sans-serif;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-cream: var(--cream);
+  --color-cream-dark: var(--cream-dark);
+  --color-nook-green: var(--nook-green);
+  --color-nook-green-light: var(--nook-green-light);
+  --color-nook-green-dark: var(--nook-green-dark);
+  --color-wood-brown: var(--wood-brown);
+  --color-wood-brown-light: var(--wood-brown-light);
+  --color-wood-brown-dark: var(--wood-brown-dark);
+  --color-bell-yellow: var(--bell-yellow);
+  --color-bell-yellow-light: var(--bell-yellow-light);
+  --color-sky-blue: var(--sky-blue);
+  --color-sky-blue-light: var(--sky-blue-light);
+  --color-ocean-blue: var(--ocean-blue);
+  --color-sand: var(--sand);
+  --color-coral-pink: var(--coral-pink);
+  --color-leaf-shadow: var(--leaf-shadow);
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  box-sizing: border-box;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-body);
+  min-height: 100vh;
+}
+
+/* Paper texture overlay for cards */
+.paper-texture {
+  position: relative;
+  background-color: white;
+}
+
+.paper-texture::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 400 400' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+  opacity: 0.03;
+  pointer-events: none;
+  border-radius: inherit;
+}
+
+/* Leaf decoration - ACNH iconic shape */
+.leaf-icon {
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  background: currentColor;
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z'/%3E%3Cpath d='M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12'/%3E%3C/svg%3E");
+  mask-size: contain;
+  mask-repeat: no-repeat;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z'/%3E%3Cpath d='M2 21c0-3 1.85-5.36 5.08-6C9.5 14.52 12 13 13 12'/%3E%3C/svg%3E");
+  -webkit-mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--cream-dark);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--wood-brown-light);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--wood-brown);
+}
+
+/* Focus styles */
+:focus-visible {
+  outline: 2px solid var(--nook-green);
+  outline-offset: 2px;
+}
+
+/* Selection */
+::selection {
+  background: var(--nook-green-light);
+  color: white;
+}
+
+/* Checkbox animation */
+@keyframes checkmark {
+  0% {
+    stroke-dashoffset: 20;
+  }
+  100% {
+    stroke-dashoffset: 0;
+  }
+}
+
+.animate-checkmark {
+  animation: checkmark 0.3s ease-in-out forwards;
+}
+
+/* Card hover lift */
+@keyframes gentle-float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-2px);
+  }
+}
+
+/* Stagger animation delays */
+.stagger-1 { animation-delay: 0.05s; }
+.stagger-2 { animation-delay: 0.1s; }
+.stagger-3 { animation-delay: 0.15s; }
+.stagger-4 { animation-delay: 0.2s; }
+.stagger-5 { animation-delay: 0.25s; }
+
+/* Fade in animation */
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fade-in-up 0.4s ease-out forwards;
+  opacity: 0;
+}
+
+/* Progress bar animation */
+@keyframes progress-fill {
+  from {
+    width: 0%;
+  }
+}
+
+.animate-progress {
+  animation: progress-fill 0.8s ease-out forwards;
 }
