@@ -2,6 +2,20 @@ import type { Metadata, Viewport } from 'next';
 import { Quicksand, Nunito } from 'next/font/google';
 import './globals.css';
 import { Navigation } from '@/components/Navigation';
+import { ThemeProvider } from '@/components/ThemeProvider';
+
+// Inline script to prevent flash of wrong theme
+const themeScript = `
+(function() {
+  try {
+    var stored = localStorage.getItem('acnh-theme');
+    var theme = stored ? JSON.parse(stored).state.theme : 'system';
+    var isDark = theme === 'dark' ||
+      (theme === 'system' && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    if (isDark) document.documentElement.classList.add('dark');
+  } catch (e) {}
+})();
+`;
 
 const quicksand = Quicksand({
   subsets: ['latin'],
@@ -57,24 +71,29 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className={`${quicksand.variable} ${nunito.variable}`}>
+    <html lang="en" className={`${quicksand.variable} ${nunito.variable}`} suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+      </head>
       <body className="antialiased">
-        <Navigation />
-        <main className="min-h-[calc(100vh-4rem)]">
-          {children}
-        </main>
+        <ThemeProvider>
+          <Navigation />
+          <main className="min-h-[calc(100vh-4rem)]">
+            {children}
+          </main>
 
-        {/* Decorative footer */}
-        <footer className="py-8 text-center border-t-2 border-[var(--border-light)]">
-          <div className="flex items-center justify-center gap-2 text-sm text-[var(--foreground-muted)]">
-            <span className="leaf-icon text-[var(--nook-green)]" />
-            <span>Made with love for island dwellers everywhere</span>
-            <span className="leaf-icon text-[var(--nook-green)]" />
-          </div>
-          <p className="text-xs text-[var(--foreground-muted)] mt-2">
-            Not affiliated with Nintendo. Animal Crossing is a trademark of Nintendo.
-          </p>
-        </footer>
+          {/* Decorative footer */}
+          <footer className="py-8 text-center border-t-2 border-[var(--border-light)]">
+            <div className="flex items-center justify-center gap-2 text-sm text-[var(--foreground-muted)]">
+              <span className="leaf-icon text-[var(--nook-green)]" />
+              <span>Made with love for island dwellers everywhere</span>
+              <span className="leaf-icon text-[var(--nook-green)]" />
+            </div>
+            <p className="text-xs text-[var(--foreground-muted)] mt-2">
+              Not affiliated with Nintendo. Animal Crossing is a trademark of Nintendo.
+            </p>
+          </footer>
+        </ThemeProvider>
       </body>
     </html>
   );

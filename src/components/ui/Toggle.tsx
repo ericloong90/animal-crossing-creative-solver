@@ -31,7 +31,7 @@ export function Toggle({
           className={`
             absolute top-0.5 left-0.5
             w-5 h-5 rounded-full
-            bg-white shadow-md
+            bg-[var(--card-bg)] shadow-md
             transition-transform duration-200
             ${checked ? 'translate-x-5' : 'translate-x-0'}
           `}

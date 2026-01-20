@@ -17,7 +17,19 @@
   --ocean-blue: #4A90A4;
   --sand: #F4E4BC;
   --coral-pink: #FFB4A2;
+  --coral-pink-hover: #ff9a85;
+  --coral-pink-shadow: #e5968a;
+  --coral-pink-bg: #FFE4DD;
   --leaf-shadow: rgba(93, 156, 89, 0.15);
+
+  /* HHP (Happy Home Paradise) Colors */
+  --hhp-bg: linear-gradient(to right, #ecfeff, #eff6ff);
+  --hhp-border: #a5f3fc;
+  --hhp-icon-bg: #cffafe;
+  --hhp-text: #0e7490;
+  --hhp-text-muted: #155e75;
+  --hhp-hover: #ecfeff;
+  --hhp-input-bg: #ffffff;
 
   /* Semantic Colors */
   --background: var(--cream);
@@ -32,6 +44,10 @@
   --border: var(--wood-brown-light);
   --border-light: #D4C4A8;
 
+  /* Card and input backgrounds */
+  --card-bg: #ffffff;
+  --input-bg: #ffffff;
+
   /* Shadows */
   --shadow-sm: 0 2px 4px rgba(107, 88, 66, 0.1);
   --shadow-md: 0 4px 12px rgba(107, 88, 66, 0.15);
@@ -40,6 +56,61 @@
   /* Fonts */
   --font-display: 'Quicksand', sans-serif;
   --font-body: 'Nunito', sans-serif;
+}
+
+/* ACNH Night Theme - Deep blue-purple night sky with warm lamp-light accents */
+:root.dark {
+  /* Dark theme palette */
+  --cream: #1a1f2e;
+  --cream-dark: #242b3d;
+  --nook-green: #4a8c4a;
+  --nook-green-light: #5fa85f;
+  --nook-green-dark: #3a6c3a;
+  --wood-brown: #6e5c4a;
+  --wood-brown-light: #5a4d3e;
+  --wood-brown-dark: #4a3d32;
+  --bell-yellow: #e6c547;
+  --bell-yellow-light: #f0d76b;
+  --sky-blue: #5a8aa8;
+  --sky-blue-light: #7aa8c8;
+  --ocean-blue: #3a7088;
+  --sand: #3d3a30;
+  --coral-pink: #c98a7a;
+  --coral-pink-hover: #d99a8a;
+  --coral-pink-shadow: #b07a6a;
+  --coral-pink-bg: rgba(201, 138, 122, 0.2);
+  --leaf-shadow: rgba(74, 140, 74, 0.2);
+
+  /* HHP (Happy Home Paradise) Colors - Night Mode */
+  --hhp-bg: linear-gradient(to right, #1e3a4a, #1e2a3a);
+  --hhp-border: #2d5a6a;
+  --hhp-icon-bg: #254555;
+  --hhp-text: #7dd3fc;
+  --hhp-text-muted: #67c2e8;
+  --hhp-hover: #2a4a5a;
+  --hhp-input-bg: #2a3a4a;
+
+  /* Semantic Colors */
+  --background: #1a1f2e;
+  --background-alt: #242b3d;
+  --foreground: #e8e4d9;
+  --foreground-muted: #9ca3af;
+  --primary: var(--nook-green);
+  --primary-light: var(--nook-green-light);
+  --primary-dark: var(--nook-green-dark);
+  --accent: var(--bell-yellow);
+  --accent-light: var(--bell-yellow-light);
+  --border: #404859;
+  --border-light: #353d4f;
+
+  /* Card and input backgrounds */
+  --card-bg: #242b3d;
+  --input-bg: #2a3244;
+
+  /* Shadows - more subtle in dark mode */
+  --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 8px 24px rgba(0, 0, 0, 0.5);
 }
 
 @theme inline {
@@ -77,7 +148,7 @@ body {
 /* Paper texture overlay for cards */
 .paper-texture {
   position: relative;
-  background-color: white;
+  background-color: var(--card-bg);
 }
 
 .paper-texture::before {
@@ -88,6 +159,10 @@ body {
   opacity: 0.03;
   pointer-events: none;
   border-radius: inherit;
+}
+
+:root.dark .paper-texture::before {
+  opacity: 0.05;
 }
 
 /* Leaf decoration - ACNH iconic shape */
@@ -115,17 +190,17 @@ html {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--cream-dark);
+  background: var(--background-alt);
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--wood-brown-light);
+  background: var(--border);
   border-radius: 5px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--wood-brown);
+  background: var(--foreground-muted);
 }
 
 /* Focus styles */
@@ -138,6 +213,14 @@ html {
 ::selection {
   background: var(--nook-green-light);
   color: white;
+}
+
+/* Theme transition - smooth color changes */
+html.theme-transition,
+html.theme-transition *,
+html.theme-transition *::before,
+html.theme-transition *::after {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease !important;
 }
 
 /* Checkbox animation */

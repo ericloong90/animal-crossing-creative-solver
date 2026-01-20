@@ -194,7 +194,7 @@ export function StuckWizard() {
                       href={`/milestone/${blocker.id}`}
                       className="
                         flex items-center gap-3 p-4 rounded-xl
-                        bg-white border-2 border-[var(--coral-pink)]
+                        bg-[var(--card-bg)] border-2 border-[var(--coral-pink)]
                         hover:bg-[var(--coral-pink)]/10 transition-colors
                       "
                     >
@@ -326,7 +326,7 @@ export function StuckWizard() {
                     href={`/milestone/${status.milestone.id}`}
                     className="
                       flex items-center gap-3 p-4 rounded-xl
-                      bg-white border-2 border-[var(--border-light)]
+                      bg-[var(--card-bg)] border-2 border-[var(--border-light)]
                       hover:border-[var(--nook-green)] transition-colors
                     "
                   >

@@ -41,7 +41,7 @@ export function QuickStats() {
       value: phaseInfo.name,
       icon: Calendar,
       color: 'var(--coral-pink)',
-      bgColor: '#FFE4DD',
+      bgColor: 'var(--coral-pink-bg)',
     },
   ];
 

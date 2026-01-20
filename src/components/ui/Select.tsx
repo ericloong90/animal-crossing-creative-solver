@@ -32,7 +32,7 @@ export function Select({
         className="
           w-full py-3 pl-4 pr-10
           appearance-none
-          bg-white rounded-xl
+          bg-[var(--input-bg)] rounded-xl
           border-2 border-[var(--border-light)]
           text-[var(--foreground)]
           focus:outline-none focus:border-[var(--nook-green)]

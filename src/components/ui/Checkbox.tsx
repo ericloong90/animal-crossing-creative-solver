@@ -50,7 +50,7 @@ export function Checkbox({
             ${
               checked
                 ? 'bg-[var(--nook-green)] border-[var(--nook-green-dark)]'
-                : 'bg-white border-[var(--wood-brown-light)] hover:border-[var(--nook-green-light)]'
+                : 'bg-[var(--input-bg)] border-[var(--border)] hover:border-[var(--nook-green-light)]'
             }
             peer-focus-visible:ring-2 peer-focus-visible:ring-[var(--nook-green)] peer-focus-visible:ring-offset-2
           `}

@@ -91,7 +91,7 @@ export function WhatsNext() {
                 key={milestone.id}
                 className={`
                   p-4 rounded-xl
-                  bg-white border-2 border-[var(--border-light)]
+                  bg-[var(--card-bg)] border-2 border-[var(--border-light)]
                   hover:border-[var(--nook-green-light)] hover:shadow-[var(--shadow-sm)]
                   transition-all duration-200
                   animate-fade-in-up

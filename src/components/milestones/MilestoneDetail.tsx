@@ -82,7 +82,7 @@ export function MilestoneDetail({ milestone }: MilestoneDetailProps) {
         p-6 rounded-2xl border-2
         ${isCompleted
           ? 'bg-[var(--leaf-shadow)] border-[var(--nook-green)]'
-          : 'bg-white border-[var(--border-light)]'
+          : 'bg-[var(--card-bg)] border-[var(--border-light)]'
         }
       `}>
         <div className="flex items-start gap-4">

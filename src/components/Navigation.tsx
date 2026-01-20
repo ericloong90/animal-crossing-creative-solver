@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useProgress } from '@/hooks/useProgress';
 import { Leaf, Home, List, HelpCircle, RotateCcw } from 'lucide-react';
+import { ThemeToggle } from '@/components/ui/ThemeToggle';
 
 export function Navigation() {
   const pathname = usePathname();
@@ -16,7 +17,7 @@ export function Navigation() {
   ];
 
   return (
-    <nav className="sticky top-0 z-50 bg-[var(--cream)]/95 backdrop-blur-sm border-b-2 border-[var(--border-light)]">
+    <nav className="sticky top-0 z-50 bg-[var(--background)]/95 backdrop-blur-sm border-b-2 border-[var(--border-light)]">
       <div className="max-w-5xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           {/* Logo */}
@@ -60,6 +61,9 @@ export function Navigation() {
               );
             })}
 
+            {/* Theme toggle */}
+            <ThemeToggle />
+
             {/* Reset button */}
             <button
               onClick={() => {
@@ -68,7 +72,7 @@ export function Navigation() {
                 }
               }}
               className="
-                ml-2 p-2 rounded-xl
+                p-2 rounded-xl
                 text-[var(--foreground-muted)] hover:text-[var(--coral-pink)]
                 hover:bg-[var(--coral-pink)]/10
                 transition-colors

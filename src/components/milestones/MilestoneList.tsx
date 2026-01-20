@@ -100,7 +100,7 @@ export function MilestoneList() {
               flex items-center gap-2
               ${showFilters
                 ? 'bg-[var(--nook-green)] text-white border-[var(--nook-green)]'
-                : 'bg-white text-[var(--foreground)] border-[var(--border-light)] hover:border-[var(--nook-green-light)]'
+                : 'bg-[var(--card-bg)] text-[var(--foreground)] border-[var(--border-light)] hover:border-[var(--nook-green-light)]'
               }
             `}
           >
@@ -111,7 +111,7 @@ export function MilestoneList() {
 
         {/* Expandable filters */}
         {showFilters && (
-          <div className="p-4 bg-white rounded-xl border-2 border-[var(--border-light)] animate-fade-in-up">
+          <div className="p-4 bg-[var(--card-bg)] rounded-xl border-2 border-[var(--border-light)] animate-fade-in-up">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
               <Select
                 options={categoryOptions}
@@ -136,25 +136,25 @@ export function MilestoneList() {
 
         {/* Vacation Homes Counter - shown when viewing DLC content */}
         {showVacationHomesCounter && (
-          <div className="p-4 rounded-xl bg-gradient-to-r from-cyan-50 to-blue-50 border-2 border-cyan-200 animate-fade-in-up">
+          <div className="p-4 rounded-xl border-2 border-[var(--hhp-border)] animate-fade-in-up" style={{ background: 'var(--hhp-bg)' }}>
             <div className="flex items-center justify-between flex-wrap gap-4">
               <div className="flex items-center gap-3">
-                <div className="p-2 rounded-lg bg-cyan-100">
-                  <Palmtree className="w-5 h-5 text-cyan-600" />
+                <div className="p-2 rounded-lg bg-[var(--hhp-icon-bg)]">
+                  <Palmtree className="w-5 h-5 text-[var(--hhp-text)]" />
                 </div>
                 <div>
-                  <h4 className="font-semibold text-gray-900">Happy Home Paradise Progress</h4>
-                  <p className="text-sm text-gray-600">
+                  <h4 className="font-semibold text-[var(--foreground)]">Happy Home Paradise Progress</h4>
+                  <p className="text-sm text-[var(--foreground-muted)]">
                     Track your vacation homes to unlock HHP milestones
                   </p>
                 </div>
               </div>
               <div className="flex items-center gap-3">
-                <span className="text-sm text-gray-600">Homes designed:</span>
-                <div className="flex items-center gap-2 bg-white rounded-lg border border-cyan-200 p-1">
+                <span className="text-sm text-[var(--foreground-muted)]">Homes designed:</span>
+                <div className="flex items-center gap-2 bg-[var(--hhp-input-bg)] rounded-lg border border-[var(--hhp-border)] p-1">
                   <button
                     onClick={() => setVacationHomesCount(Math.max(0, vacationHomesDesigned - 1))}
-                    className="p-2 rounded-md hover:bg-cyan-50 text-cyan-600 transition-colors"
+                    className="p-2 rounded-md hover:bg-[var(--hhp-hover)] text-[var(--hhp-text)] transition-colors"
                     aria-label="Decrease vacation homes"
                   >
                     <Minus size={16} />
@@ -165,11 +165,11 @@ export function MilestoneList() {
                     onChange={(e) => setVacationHomesCount(parseInt(e.target.value) || 0)}
                     min={0}
                     max={999}
-                    className="w-16 text-center font-bold text-lg text-cyan-700 bg-transparent border-none focus:outline-none focus:ring-0"
+                    className="w-16 text-center font-bold text-lg text-[var(--hhp-text-muted)] bg-transparent border-none focus:outline-none focus:ring-0"
                   />
                   <button
                     onClick={() => setVacationHomesCount(vacationHomesDesigned + 1)}
-                    className="p-2 rounded-md hover:bg-cyan-50 text-cyan-600 transition-colors"
+                    className="p-2 rounded-md hover:bg-[var(--hhp-hover)] text-[var(--hhp-text)] transition-colors"
                     aria-label="Increase vacation homes"
                   >
                     <Plus size={16} />

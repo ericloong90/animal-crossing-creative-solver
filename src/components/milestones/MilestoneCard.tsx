@@ -57,7 +57,7 @@ export function MilestoneCard({ milestone, showDetails = true }: MilestoneCardPr
           isCompleted
             ? 'bg-[var(--leaf-shadow)] border-[var(--nook-green-light)]'
             : isAvailable
-            ? 'bg-white border-[var(--border-light)] hover:border-[var(--nook-green-light)] hover:shadow-[var(--shadow-sm)]'
+            ? 'bg-[var(--card-bg)] border-[var(--border-light)] hover:border-[var(--nook-green-light)] hover:shadow-[var(--shadow-sm)]'
             : 'bg-[var(--cream-dark)] border-[var(--border-light)] opacity-75'
         }
       `}

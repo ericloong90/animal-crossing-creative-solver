@@ -18,9 +18,9 @@ export function Card({
   const baseStyles = 'rounded-2xl transition-all duration-200';
 
   const variantStyles = {
-    default: 'bg-white paper-texture border-2 border-[var(--border-light)]',
-    elevated: 'bg-white paper-texture shadow-[var(--shadow-md)] hover:shadow-[var(--shadow-lg)]',
-    outlined: 'bg-transparent border-2 border-dashed border-[var(--wood-brown-light)]',
+    default: 'bg-[var(--card-bg)] paper-texture border-2 border-[var(--border-light)]',
+    elevated: 'bg-[var(--card-bg)] paper-texture shadow-[var(--shadow-md)] hover:shadow-[var(--shadow-lg)]',
+    outlined: 'bg-transparent border-2 border-dashed border-[var(--border)]',
   };
 
   const paddingStyles = {

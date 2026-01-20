@@ -51,9 +51,9 @@ export function Button({
     `,
     danger: `
       bg-[var(--coral-pink)] text-white
-      hover:bg-[#ff9a85]
-      shadow-[0_4px_0_#e5968a]
-      active:shadow-[0_2px_0_#e5968a]
+      hover:bg-[var(--coral-pink-hover)]
+      shadow-[0_4px_0_var(--coral-pink-shadow)]
+      active:shadow-[0_2px_0_var(--coral-pink-shadow)]
       active:translate-y-[2px]
     `,
   };

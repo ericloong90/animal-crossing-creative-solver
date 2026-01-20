@@ -110,7 +110,7 @@ export function ProgressOverview() {
                       {percentage}%
                     </span>
                   </div>
-                  <div className="h-1.5 bg-white rounded-full mt-2 overflow-hidden">
+                  <div className="h-1.5 bg-[var(--card-bg)] rounded-full mt-2 overflow-hidden">
                     <div
                       className="h-full bg-[var(--nook-green)] rounded-full transition-all duration-500"
                       style={{ width: `${percentage}%` }}

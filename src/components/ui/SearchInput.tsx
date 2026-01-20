@@ -28,7 +28,7 @@ export function SearchInput({
         placeholder={placeholder}
         className="
           w-full pl-12 pr-10 py-3
-          bg-white rounded-xl
+          bg-[var(--input-bg)] rounded-xl
           border-2 border-[var(--border-light)]
           text-[var(--foreground)]
           placeholder:text-[var(--foreground-muted)]
