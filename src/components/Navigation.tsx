@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useProgress } from '@/hooks/useProgress';
-import { Leaf, Home, List, HelpCircle, RotateCcw } from 'lucide-react';
+import { Leaf, Home, List, HelpCircle, RotateCcw, Bug } from 'lucide-react';
 import { ThemeToggle } from '@/components/ui/ThemeToggle';
 
 export function Navigation() {
@@ -13,6 +13,7 @@ export function Navigation() {
   const links = [
     { href: '/', label: 'Dashboard', icon: Home },
     { href: '/checklist', label: 'Checklist', icon: List },
+    { href: '/critters', label: 'Critters', icon: Bug },
     { href: '/stuck', label: "I'm Stuck", icon: HelpCircle },
   ];
 
