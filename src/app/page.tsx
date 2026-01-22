@@ -1,6 +1,7 @@
 'use client';
 
 import { ProgressOverview, WhatsNext, QuickStats } from '@/components/dashboard';
+import { UpcomingEvents } from '@/components/events';
 import { Leaf } from 'lucide-react';
 
 export default function DashboardPage() {
@@ -30,6 +31,11 @@ export default function DashboardPage() {
       <div className="grid lg:grid-cols-2 gap-6 mt-6">
         <ProgressOverview />
         <WhatsNext />
+      </div>
+
+      {/* Upcoming Events */}
+      <div className="mt-6">
+        <UpcomingEvents limit={4} />
       </div>
 
       {/* Decorative elements */}
