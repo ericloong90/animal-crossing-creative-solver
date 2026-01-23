@@ -55,19 +55,26 @@ export function WhatsNext() {
   }
 
   return (
-    <Card variant="elevated" className="animate-fade-in-up stagger-1">
+    <Card
+      variant="elevated"
+      className="animate-fade-in-up stagger-1 border-2 border-[var(--nook-green)] shadow-lg"
+      style={{
+        background: 'linear-gradient(135deg, var(--card-bg) 0%, var(--leaf-shadow) 100%)',
+        boxShadow: '0 4px 20px rgba(93, 156, 89, 0.15)',
+      }}
+    >
       <CardContent>
         <div className="flex items-center justify-between mb-6">
           <div className="flex items-center gap-3">
-            <div className="p-3 rounded-xl bg-[var(--bell-yellow-light)]">
-              <Sparkles className="w-6 h-6 text-[var(--bell-yellow)]" />
+            <div className="p-4 rounded-xl bg-[var(--nook-green)] shadow-md">
+              <Sparkles className="w-7 h-7 text-white" />
             </div>
             <div>
-              <h2 className="text-2xl font-bold text-[var(--foreground)]" style={{ fontFamily: 'var(--font-display)' }}>
+              <h2 className="text-3xl font-bold text-[var(--foreground)]" style={{ fontFamily: 'var(--font-display)' }}>
                 What&apos;s Next?
               </h2>
-              <p className="text-[var(--foreground-muted)]">
-                Recommended milestones to tackle
+              <p className="text-[var(--foreground-muted)] font-medium">
+                Your next milestones to tackle
               </p>
             </div>
           </div>

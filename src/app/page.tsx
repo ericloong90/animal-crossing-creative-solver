@@ -24,13 +24,17 @@ export default function DashboardPage() {
         </p>
       </div>
 
-      {/* Quick Stats */}
-      <QuickStats />
+      {/* What's Next - Primary Focus */}
+      <WhatsNext />
 
-      {/* Main Content Grid */}
-      <div className="grid lg:grid-cols-2 gap-6 mt-6">
+      {/* Quick Stats */}
+      <div className="mt-6">
+        <QuickStats />
+      </div>
+
+      {/* Progress Overview */}
+      <div className="mt-6">
         <ProgressOverview />
-        <WhatsNext />
       </div>
 
       {/* Upcoming Events */}

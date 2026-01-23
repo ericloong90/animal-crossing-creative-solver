@@ -3,6 +3,7 @@ import { Quicksand, Nunito } from 'next/font/google';
 import './globals.css';
 import { Navigation } from '@/components/Navigation';
 import { ThemeProvider } from '@/components/ThemeProvider';
+import { Agentation } from 'agentation';
 
 // Inline script to prevent flash of wrong theme
 const themeScript = `
@@ -94,6 +95,7 @@ export default function RootLayout({
             </p>
           </footer>
         </ThemeProvider>
+        {process.env.NODE_ENV === 'development' && <Agentation />}
       </body>
     </html>
   );
