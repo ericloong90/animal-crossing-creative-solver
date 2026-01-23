@@ -1,12 +1,13 @@
 'use client';
 
-import { ReactNode } from 'react';
+import { ReactNode, CSSProperties } from 'react';
 
 interface CardProps {
   children: ReactNode;
   className?: string;
   variant?: 'default' | 'elevated' | 'outlined';
   padding?: 'none' | 'sm' | 'md' | 'lg';
+  style?: CSSProperties;
 }
 
 export function Card({
@@ -14,6 +15,7 @@ export function Card({
   className = '',
   variant = 'default',
   padding = 'md',
+  style,
 }: CardProps) {
   const baseStyles = 'rounded-2xl transition-all duration-200';
 
@@ -31,7 +33,7 @@ export function Card({
   };
 
   return (
-    <div className={`${baseStyles} ${variantStyles[variant]} ${paddingStyles[padding]} ${className}`}>
+    <div className={`${baseStyles} ${variantStyles[variant]} ${paddingStyles[padding]} ${className}`} style={style}>
       {children}
     </div>
   );
