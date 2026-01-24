@@ -1,11 +1,11 @@
 'use client';
 
-import { useMemo } from 'react';
+import { useCallback, useMemo } from 'react';
 import { Star, Coins, TrendingUp, Users, Package, Calendar } from 'lucide-react';
 import { DailyTaskItem } from './DailyTaskItem';
 import { useDailyChecklistStore } from '@/store/daily-checklist-store';
 import { DAILY_TASKS } from '@/data/daily-tasks';
-import { CATEGORY_INFO, type DailyTaskCategory } from '@/types/daily-checklist';
+import { CATEGORY_INFO, getACNHDate, type DailyTaskCategory } from '@/types/daily-checklist';
 
 const categoryIcons: Record<DailyTaskCategory, typeof Star> = {
   essential: Star,
@@ -18,8 +18,16 @@ const categoryIcons: Record<DailyTaskCategory, typeof Star> = {
 
 export function DailyTaskList() {
   const enabledTasks = useDailyChecklistStore((state) => state.enabledTasks);
-  const isTaskCompleted = useDailyChecklistStore((state) => state.isTaskCompleted);
+  const dayRecords = useDailyChecklistStore((state) => state.dayRecords);
   const toggleTask = useDailyChecklistStore((state) => state.toggleTask);
+
+  // Derive completion status from dayRecords to ensure reactivity
+  const today = getACNHDate();
+  const todayRecord = dayRecords[today];
+  const isTaskCompleted = useCallback(
+    (taskId: string) => todayRecord?.completedTasks.some((c) => c.taskId === taskId) ?? false,
+    [todayRecord]
+  );
 
   // Get only enabled tasks
   const activeTasks = useMemo(() => {
