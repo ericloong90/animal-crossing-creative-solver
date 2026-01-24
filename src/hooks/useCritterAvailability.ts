@@ -3,6 +3,7 @@
 import { useMemo } from 'react';
 import type { Critter, CritterAvailability, Hemisphere } from '@/types/critter';
 import { useCritterStore } from '@/store/critter-store';
+import { useCurrentMonthAndHour } from './useCurrentTime';
 
 interface CritterWithAvailability {
   critter: Critter;
@@ -80,12 +81,9 @@ export function getCritterAvailability(
 // Hook to get availability for all critters
 export function useCritterAvailability(critters: Critter[]): CritterWithAvailability[] {
   const hemisphere = useCritterStore((state) => state.hemisphere);
+  const { month: currentMonth, hour: currentHour } = useCurrentMonthAndHour();
 
   return useMemo(() => {
-    const now = new Date();
-    const currentMonth = now.getMonth() + 1; // 1-12
-    const currentHour = now.getHours(); // 0-23
-
     return critters.map((critter) => {
       const availability = getCritterAvailability(critter, hemisphere, currentMonth, currentHour);
       const monthsActive = critter.months[hemisphere];
@@ -99,19 +97,16 @@ export function useCritterAvailability(critters: Critter[]): CritterWithAvailabi
         isCurrentlyAvailable,
       };
     });
-  }, [critters, hemisphere]);
+  }, [critters, hemisphere, currentMonth, currentHour]);
 }
 
 // Hook to get summary stats
 export function useCritterStats(critters: Critter[]) {
   const hemisphere = useCritterStore((state) => state.hemisphere);
   const caughtCritters = useCritterStore((state) => state.caughtCritters);
+  const { month: currentMonth, hour: currentHour } = useCurrentMonthAndHour();
 
   return useMemo(() => {
-    const now = new Date();
-    const currentMonth = now.getMonth() + 1;
-    const currentHour = now.getHours();
-
     let availableNow = 0;
     let leavingSoon = 0;
     let newThisMonth = 0;
@@ -145,7 +140,7 @@ export function useCritterStats(critters: Critter[]) {
       newThisMonth,
       percentComplete: Math.round((caught / critters.length) * 100),
     };
-  }, [critters, hemisphere, caughtCritters]);
+  }, [critters, hemisphere, caughtCritters, currentMonth, currentHour]);
 }
 
 // Format time ranges for display

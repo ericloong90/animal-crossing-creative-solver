@@ -9,6 +9,7 @@ import {
   sortEventsByPriority,
   getEventsForMonth,
 } from '@/lib/event-utils';
+import { useCurrentTime } from './useCurrentTime';
 import type { EventWithStatus, EventCategory, EventStatus } from '@/types/event';
 
 interface UseEventCalendarOptions {
@@ -20,9 +21,10 @@ interface UseEventCalendarOptions {
 export function useEventCalendar(options: UseEventCalendarOptions = {}) {
   const hemisphere = useCritterStore((state) => state.hemisphere);
   const notifyDaysBefore = useEventStore((state) => state.notifyDaysBefore);
+  const now = useCurrentTime();
 
   const eventsWithStatus = useMemo(() => {
-    let events = getEventsWithStatus(allEvents, hemisphere);
+    let events = getEventsWithStatus(allEvents, hemisphere, now);
 
     // Apply category filter
     if (options.categories && options.categories.length > 0) {
@@ -40,7 +42,7 @@ export function useEventCalendar(options: UseEventCalendarOptions = {}) {
     }
 
     return sortEventsByPriority(events);
-  }, [hemisphere, options.categories, options.statuses, options.excludePassed]);
+  }, [hemisphere, now, options.categories, options.statuses, options.excludePassed]);
 
   const happeningNow = useMemo(() => {
     return eventsWithStatus.filter((e) => e.status === 'happening-now');
@@ -94,10 +96,10 @@ export function useEventsForMonth(year: number, month: number) {
 
   const eventsForMonth = useMemo(() => {
     const events = getEventsWithStatus(allEvents, hemisphere);
-    return getEventsForMonth(events, year, month);
+    return getEventsForMonth(events, year, month, hemisphere);
   }, [hemisphere, year, month]);
 
-  return eventsForMonth;
+  return { events: eventsForMonth, hemisphere };
 }
 
 export function useEventInterest(eventId: string) {

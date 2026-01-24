@@ -11,9 +11,12 @@ interface EventCountdownProps {
 }
 
 export function EventCountdown({ event, showDate = true, size = 'md' }: EventCountdownProps) {
-  const { daysUntil, nextOccurrence, status } = event;
+  const { daysUntil, nextOccurrence, status, occurrenceDate } = event;
 
-  if (!nextOccurrence) return null;
+  // Use occurrenceDate when available (e.g., from calendar click), otherwise use nextOccurrence
+  const displayDate = occurrenceDate ?? nextOccurrence;
+
+  if (!displayDate) return null;
 
   const sizeClasses = {
     sm: 'text-xs',
@@ -27,8 +30,13 @@ export function EventCountdown({ event, showDate = true, size = 'md' }: EventCou
     lg: 16,
   };
 
-  const daysText = formatDaysUntil(daysUntil);
-  const dateText = formatEventDate(nextOccurrence);
+  // Recalculate daysUntil if using occurrenceDate
+  const computedDaysUntil = occurrenceDate
+    ? Math.ceil((occurrenceDate.getTime() - new Date().getTime()) / (1000 * 60 * 60 * 24))
+    : daysUntil;
+
+  const daysText = formatDaysUntil(computedDaysUntil);
+  const dateText = formatEventDate(displayDate);
 
   // Different styling based on urgency
   const urgencyClass =

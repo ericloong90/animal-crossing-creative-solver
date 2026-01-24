@@ -191,7 +191,11 @@ export const useDailyChecklistStore = create<DailyChecklistStore>()(
         let checkDate = new Date(today + 'T12:00:00');
 
         while (true) {
-          const dateStr = checkDate.toISOString().split('T')[0];
+          // Use local time formatting instead of UTC-based toISOString()
+          const year = checkDate.getFullYear();
+          const month = String(checkDate.getMonth() + 1).padStart(2, '0');
+          const day = String(checkDate.getDate()).padStart(2, '0');
+          const dateStr = `${year}-${month}-${day}`;
           const dayRecord = dayRecords[dateStr];
 
           if (!dayRecord) break;

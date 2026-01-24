@@ -24,7 +24,7 @@ export function EventCalendar({ onEventClick }: EventCalendarProps) {
   const [currentMonth, setCurrentMonth] = useState(today.getMonth() + 1);
   const [currentYear, setCurrentYear] = useState(today.getFullYear());
 
-  const events = useEventsForMonth(currentYear, currentMonth);
+  const { events, hemisphere } = useEventsForMonth(currentYear, currentMonth);
 
   const calendarDays = useMemo(() => {
     const firstDay = new Date(currentYear, currentMonth - 1, 1);
@@ -80,7 +80,7 @@ export function EventCalendar({ onEventClick }: EventCalendarProps) {
 
   const getEventsForDayNumber = (day: number): EventWithStatus[] => {
     const date = new Date(currentYear, currentMonth - 1, day);
-    return getEventsForDay(events, date);
+    return getEventsForDay(events, date, hemisphere);
   };
 
   return (

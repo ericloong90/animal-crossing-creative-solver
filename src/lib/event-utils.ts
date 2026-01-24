@@ -211,9 +211,13 @@ export function isEventHappeningNow(
   for (const eventDate of dateArray) {
     if (isDateWithinEvent(eventDate, now)) {
       // Check time constraints
+      const hour = now.getHours();
       if (eventDate.startHour !== undefined && eventDate.endHour !== undefined) {
-        const hour = now.getHours();
         return hour >= eventDate.startHour && hour < eventDate.endHour;
+      }
+      // If only startHour is defined, event is active from startHour until end of day
+      if (eventDate.startHour !== undefined) {
+        return hour >= eventDate.startHour;
       }
       return true;
     }
@@ -355,35 +359,99 @@ export function formatDaysUntil(daysUntil: number | null): string {
 }
 
 /**
+ * Get all occurrences of an event within a specific month
+ */
+function getAllOccurrencesInMonth(
+  event: GameEvent,
+  hemisphere: Hemisphere,
+  year: number,
+  month: number // 1-12
+): Date[] {
+  let dates: EventDate | EventDate[];
+
+  if (isHemisphereDates(event.dates)) {
+    dates = event.dates[hemisphere];
+  } else {
+    dates = event.dates;
+  }
+
+  const dateArray = Array.isArray(dates) ? dates : [dates];
+  const occurrences: Date[] = [];
+  const daysInMonth = new Date(year, month, 0).getDate();
+
+  for (const eventDate of dateArray) {
+    // Check each day in the month
+    for (let day = 1; day <= daysInMonth; day++) {
+      const checkDate = new Date(year, month - 1, day, 12, 0, 0);
+      if (isDateWithinEvent(eventDate, checkDate)) {
+        occurrences.push(checkDate);
+      }
+    }
+  }
+
+  return occurrences;
+}
+
+/**
  * Get events happening in a specific month (for calendar view)
+ * Returns all occurrences of each event within the month
  */
 export function getEventsForMonth(
   events: EventWithStatus[],
   year: number,
-  month: number // 1-12
+  month: number, // 1-12
+  hemisphere: Hemisphere = 'northern'
 ): EventWithStatus[] {
-  return events.filter((event) => {
-    if (!event.nextOccurrence) return false;
-    return (
-      event.nextOccurrence.getFullYear() === year &&
-      event.nextOccurrence.getMonth() === month - 1
-    );
-  });
+  const result: EventWithStatus[] = [];
+
+  for (const event of events) {
+    const occurrences = getAllOccurrencesInMonth(event, hemisphere, year, month);
+    if (occurrences.length > 0) {
+      // Add event with first occurrence of this month as nextOccurrence
+      result.push({
+        ...event,
+        nextOccurrence: occurrences[0],
+      });
+    }
+  }
+
+  return result;
 }
 
 /**
  * Get events for a specific day (for calendar view)
+ * Checks if the event is active on that specific day, not just nextOccurrence
+ * Returns events with occurrenceDate set to the clicked date for accurate countdowns
  */
 export function getEventsForDay(
   events: EventWithStatus[],
-  date: Date
+  date: Date,
+  hemisphere: Hemisphere = 'northern'
 ): EventWithStatus[] {
-  return events.filter((event) => {
-    if (!event.nextOccurrence) return false;
-    return (
-      event.nextOccurrence.getDate() === date.getDate() &&
-      event.nextOccurrence.getMonth() === date.getMonth() &&
-      event.nextOccurrence.getFullYear() === date.getFullYear()
-    );
-  });
+  const result: EventWithStatus[] = [];
+
+  for (const event of events) {
+    let dates: EventDate | EventDate[];
+
+    if (isHemisphereDates(event.dates)) {
+      dates = event.dates[hemisphere];
+    } else {
+      dates = event.dates;
+    }
+
+    const dateArray = Array.isArray(dates) ? dates : [dates];
+
+    for (const eventDate of dateArray) {
+      if (isDateWithinEvent(eventDate, date)) {
+        // Return a new event object with occurrenceDate set to this specific day
+        result.push({
+          ...event,
+          occurrenceDate: new Date(date.getFullYear(), date.getMonth(), date.getDate()),
+        });
+        break;
+      }
+    }
+  }
+
+  return result;
 }

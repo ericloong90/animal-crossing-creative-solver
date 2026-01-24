@@ -104,6 +104,8 @@ export interface EventWithStatus extends GameEvent {
   nextOccurrence: Date | null;
   daysUntil: number | null;
   isShoppingAvailable: boolean;
+  /** When set, represents a specific occurrence date (e.g., when clicking a day in the calendar) */
+  occurrenceDate?: Date;
 }
 
 // Category styling info

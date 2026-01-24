@@ -41,14 +41,18 @@ export const CATEGORY_INFO: Record<DailyTaskCategory, { name: string; icon: stri
   seasonal: { name: 'Seasonal', icon: 'Calendar', color: 'purple' },
 };
 
-// Helper to get ACNH date (5 AM reset)
+// Helper to get ACNH date (5 AM reset) in local time
 export function getACNHDate(date: Date = new Date()): string {
   const adjusted = new Date(date);
   // If before 5 AM, count as previous day
   if (adjusted.getHours() < 5) {
     adjusted.setDate(adjusted.getDate() - 1);
   }
-  return adjusted.toISOString().split('T')[0];
+  // Use local time formatting instead of UTC-based toISOString()
+  const year = adjusted.getFullYear();
+  const month = String(adjusted.getMonth() + 1).padStart(2, '0');
+  const day = String(adjusted.getDate()).padStart(2, '0');
+  return `${year}-${month}-${day}`;
 }
 
 // Helper to check if we should reset (new ACNH day)
