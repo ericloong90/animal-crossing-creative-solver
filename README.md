@@ -29,8 +29,23 @@ To learn more about Next.js, take a look at the following resources:
 
 You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
 
-## Deploy on Vercel
+## Deployment
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+This project is deployed to AWS S3 + CloudFront.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**To deploy:**
+```bash
+./scripts/deploy.sh
+```
+
+The script:
+1. Builds the project (`npm run build`)
+2. Syncs static assets to S3 with 1-year immutable cache headers
+3. Uploads HTML files with no-cache headers
+4. Uploads PWA files (sw.js, manifest.json, workbox) with no-cache
+5. Invalidates the CloudFront cache
+
+**Live URL:** https://acnh-creative-solver.keepquietandprompt.com
+
+**Requirements:**
+- AWS CLI configured with the `sgcc-eric-admin` profile
