@@ -4,7 +4,7 @@ import { ButtonHTMLAttributes, ReactNode } from 'react';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
-  variant?: 'primary' | 'secondary' | 'ghost' | 'danger';
+  variant?: 'primary' | 'secondary' | 'ghost' | 'danger' | 'outline';
   size?: 'sm' | 'md' | 'lg';
   fullWidth?: boolean;
 }
@@ -55,6 +55,12 @@ export function Button({
       shadow-[0_4px_0_var(--coral-pink-shadow)]
       active:shadow-[0_2px_0_var(--coral-pink-shadow)]
       active:translate-y-[2px]
+    `,
+    outline: `
+      bg-transparent text-[var(--foreground)]
+      border-2 border-[var(--border)]
+      hover:bg-[var(--leaf-shadow)]
+      hover:border-[var(--nook-green-light)]
     `,
   };
 
