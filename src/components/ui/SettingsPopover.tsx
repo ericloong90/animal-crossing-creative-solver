@@ -81,7 +81,7 @@ export function SettingsPopover() {
         <div
           className="
             absolute right-0 top-full mt-2
-            w-56 p-3
+            w-64 p-3
             bg-[var(--background)] border-2 border-[var(--border-light)]
             rounded-xl shadow-lg
             z-50

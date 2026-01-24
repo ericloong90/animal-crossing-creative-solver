@@ -72,8 +72,9 @@ export function DailyTaskItem({ task, isCompleted, onToggle }: DailyTaskItemProp
 
   return (
     <div
+      onClick={onToggle}
       className={`
-        relative rounded-xl border-2 transition-all duration-200
+        relative rounded-xl border-2 transition-all duration-200 cursor-pointer
         ${
           isCompleted
             ? 'bg-[var(--nook-green)]/10 border-[var(--nook-green)]/30'
@@ -82,7 +83,7 @@ export function DailyTaskItem({ task, isCompleted, onToggle }: DailyTaskItemProp
       `}
     >
       <div className="flex items-start gap-3 p-4">
-        <div className="flex-shrink-0 pt-0.5">
+        <div className="flex-shrink-0 pt-0.5" onClick={(e) => e.stopPropagation()}>
           <Checkbox checked={isCompleted} onChange={onToggle} size="md" />
         </div>
 
@@ -115,7 +116,10 @@ export function DailyTaskItem({ task, isCompleted, onToggle }: DailyTaskItemProp
 
           {task.tips && task.tips.length > 0 && (
             <button
-              onClick={() => setIsExpanded(!isExpanded)}
+              onClick={(e) => {
+                e.stopPropagation();
+                setIsExpanded(!isExpanded);
+              }}
               className="flex items-center gap-1 text-xs text-[var(--nook-green)] mt-2 hover:underline"
             >
               {isExpanded ? <ChevronUp size={14} /> : <ChevronDown size={14} />}

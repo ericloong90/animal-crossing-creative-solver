@@ -128,7 +128,7 @@ export function DailyHistory() {
       </div>
 
       {/* Legend */}
-      <div className="flex items-center gap-4 mb-4 text-xs text-[var(--foreground-muted)]">
+      <div className="flex flex-wrap items-center gap-x-3 gap-y-1 mb-4 text-xs text-[var(--foreground-muted)]">
         <div className="flex items-center gap-1">
           <div className="w-3 h-3 rounded bg-[var(--background)] border border-[var(--border-light)]" />
           <span>0%</span>

@@ -48,7 +48,7 @@ export default function DailyPage() {
         <Button
           variant="outline"
           onClick={() => setIsSettingsOpen(true)}
-          className="flex items-center gap-2"
+          className="flex items-center gap-2 flex-shrink-0"
         >
           <Settings size={18} />
           <span className="hidden sm:inline">Settings</span>

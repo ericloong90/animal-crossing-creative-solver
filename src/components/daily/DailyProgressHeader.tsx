@@ -67,13 +67,13 @@ export function DailyProgressHeader() {
       {/* Progress bar */}
       <div className="space-y-2">
         <div className="flex items-center justify-between text-sm">
-          <div className="flex items-center gap-2 text-[var(--foreground-muted)]">
-            <CheckCircle2 size={16} className="text-[var(--nook-green)]" />
-            <span>
+          <div className="flex items-center gap-2 text-[var(--foreground-muted)] min-w-0">
+            <CheckCircle2 size={16} className="text-[var(--nook-green)] flex-shrink-0" />
+            <span className="truncate">
               {completed} of {total} tasks completed
             </span>
           </div>
-          <span className="font-medium text-[var(--foreground)]">{percentage}%</span>
+          <span className="font-medium text-[var(--foreground)] flex-shrink-0 ml-2">{percentage}%</span>
         </div>
         <ProgressBar value={percentage} max={100} size="md" />
       </div>
