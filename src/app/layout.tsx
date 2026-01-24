@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Quicksand, Nunito } from 'next/font/google';
 import './globals.css';
 import { Navigation } from '@/components/Navigation';
+import { BottomNav } from '@/components/BottomNav';
 import { ThemeProvider } from '@/components/ThemeProvider';
 import { Agentation } from 'agentation';
 
@@ -79,9 +80,10 @@ export default function RootLayout({
       <body className="antialiased">
         <ThemeProvider>
           <Navigation />
-          <main className="min-h-[calc(100vh-4rem)]">
+          <main className="min-h-[calc(100vh-4rem)] pb-20 md:pb-0">
             {children}
           </main>
+          <BottomNav />
 
           {/* Decorative footer */}
           <footer className="py-8 text-center border-t-2 border-[var(--border-light)]">
